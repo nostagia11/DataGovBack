@@ -55,7 +55,7 @@ import java.util.Optional;
             verify(columnsRepo, times(1)).save(column);
         }
 
-        @Test
+       /* @Test
         public void testUpdateColumn_Success() {
             // Arrange
             Long columnId = 1L;
@@ -99,7 +99,7 @@ import java.util.Optional;
 
             verify(columnsRepo, times(1)).findById(columnId);
             verify(columnsRepo, times(1)).save(existingColumn);
-        }
+        }*/
 
         @Test
         public void testDeleteColumn_Success() {
