@@ -65,6 +65,14 @@
 
     </dependencies>
 
+    <distributionManagement>
+        <repository>
+            <id>maven-releases</id>
+            <!-- CHANGE HERE by your team Nexus server -->
+            <url>http://13.126.124.159:8081/repository/maven-releases/</url>
+        </repository>
+    </distributionManagement>
+
     <build>
         <plugins>
             <plugin>
@@ -79,6 +87,13 @@
                     </excludes>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.2.0</version>
+            </plugin>
+
         </plugins>
     </build>
 
