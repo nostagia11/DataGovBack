@@ -22,7 +22,7 @@ services:
       - mysqldb
     networks:
       - gov-network
-    image: han/datagov:1.0.0
+    image: nostagia11/datagov:1.0.0
     restart: on-failure
     ports:
       - 8082:8082
