@@ -115,21 +115,7 @@ pipeline {
    }
 
 
-       stage('Deploying Grafana and Prometheus') {
-           steps {
-               script {
 
-                   def prometheusExists = sh(script: "docker inspect --type=container prometheus", returnStatus: true) == 0
-                   def grafanaExists = sh(script: "docker inspect --type=container grafana", returnStatus: true) == 0
 
-                   if (prometheusExists && grafanaExists) {
-                       echo 'Prometheus and Grafana are already running. Skipping deployment.'
-                   } else {
-                       sh 'docker-compose -f docker-compose-monitoring.yml up -d'
-                   }
-               }
-           }
-       }
-   }
 
 }
