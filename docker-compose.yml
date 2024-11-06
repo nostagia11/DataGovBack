@@ -44,9 +44,7 @@ volumes:
 networks:
   - gov-network
 
-secrets:
-  my_secret:
-    file:./my_secret.txt
+
 
 
 
