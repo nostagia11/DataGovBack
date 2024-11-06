@@ -6,8 +6,8 @@ pipeline {
    }
 
    environment {
-      // MAVEN_CREDENTIALS_ID = 'jenkins-nexus'
-      // MAVEN_REPO_URL = 'http://192.168.33.10:8081/repository/Jenkins-repository/'
+       MAVEN_CREDENTIALS_ID = 'nexus-cred'
+       MAVEN_REPO_URL = 'http://192.168.192.142:8081/repository/maven-releases/'
        DOCKER_CREDENTIALS_ID = 'docker-cred'
        IMAGE_NAME = 'nostagia11/datagov'
        IMAGE_TAG = '1.0.0-SNAPSHOT'
@@ -76,6 +76,43 @@ pipeline {
                }
            }
        }
+
+
+       stage("Deploy to Nexus") {
+           steps {
+               script {
+                   withCredentials([usernamePassword(credentialsId: env.MAVEN_CREDENTIALS_ID, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                       sh """
+                           mvn deploy:deploy-file \
+                           -DgroupId=tn.esprit \
+                           -DartifactId=datagov \
+                           -Dversion=1.0-SNAPSHOT \
+                           -Dpackaging=jar \
+                           -Dfile=target/datagov-1.0.0-SNAPSHOT.jar \
+                           -DrepositoryId=deploymentRepo \
+                           -Durl=${env.MAVEN_REPO_URL} \
+                           -Dusername=$USERNAME \
+                           -Dpassword=$PASSWORD
+                       """
+                   }
+               }
+           }
+       }
+
+       stage("Deploy with Docker Compose") {
+               steps {
+                   script {
+                       withCredentials([usernamePassword(credentialsId: env.DOCKER_CREDENTIALS_ID, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                           sh '''
+                               docker-compose down
+                               docker-compose pull
+                               docker-compose up -d
+                           '''
+                       }
+                   }
+               }
+
+
 
    }
 }
