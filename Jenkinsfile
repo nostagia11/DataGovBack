@@ -82,9 +82,9 @@ pipeline {
                            mvn deploy:deploy-file \
                            -DgroupId=com.dats \
                            -DartifactId=datsconnexion \
-                           -Dversion=1.0-SNAPSHOT \
+                           -Dversion=0.0.1 \
                            -Dpackaging=jar \
-                           -Dfile=target/datsconnexion-0.0.1-SNAPSHOT.jar \
+                           -Dfile=target/datsconnexion-0.0.1.jar \
                            -DrepositoryId=maven-releases \
                            -Durl=${env.MAVEN_REPO_URL} \
                            -Dusername=$USERNAME \
