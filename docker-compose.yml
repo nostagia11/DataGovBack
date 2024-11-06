@@ -18,7 +18,7 @@ services:
     networks:
       - gov-network
   app-datagov:
-    depends-on:
+    depends_on:
       - mysqldb
     networks:
       - gov-network
