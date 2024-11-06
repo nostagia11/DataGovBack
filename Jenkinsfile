@@ -84,7 +84,7 @@ pipeline {
                            -DartifactId=datsconnexion \
                            -Dversion=1.0-SNAPSHOT \
                            -Dpackaging=jar \
-                           -Dfile=target/datsconnexionDatagov-0.0.1-SNAPSHOT.jar \
+                           -Dfile=target/datsconnexion-0.0.1-SNAPSHOT.jar \
                            -DrepositoryId=deploymentRepo \
                            -Durl=${env.MAVEN_REPO_URL} \
                            -Dusername=$USERNAME \
