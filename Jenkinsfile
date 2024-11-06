@@ -100,14 +100,34 @@ pipeline {
                    script {
                        withCredentials([usernamePassword(credentialsId: env.DOCKER_CREDENTIALS_ID, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                            sh '''
-                               docker-compose down
-                               docker-compose pull
-                               docker-compose up -d
+                               docker compose down
+                               docker compose pull
+                               docker compose up -d
                            '''
                        }
                    }
                }
        }
+           stage('Deploying Grafana and Prometheus') {
+               steps {
+                   script {
+
+                       def prometheusExists = sh(script: "docker inspect --type=container prometheus", returnStatus: true) == 0
+                       def grafanaExists = sh(script: "docker inspect --type=container grafana", returnStatus: true) == 0
+
+                       if (prometheusExists && grafanaExists) {
+                           echo 'Prometheus and Grafana are already running. Skipping deployment.'
+                       } else {
+                           sh 'docker-compose -f docker-compose-monitoring.yml up -d'
+                       }
+                   }
+               }
+           }
+       }
+
+
+
+
    }
 
 
