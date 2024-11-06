@@ -9,7 +9,7 @@ pipeline {
       // MAVEN_CREDENTIALS_ID = 'jenkins-nexus'
       // MAVEN_REPO_URL = 'http://192.168.33.10:8081/repository/Jenkins-repository/'
        DOCKER_CREDENTIALS_ID = 'docker-cred'
-       IMAGE_NAME = 'nostqgiq11/datagov'
+       IMAGE_NAME = 'nostagia11/datagov'
        IMAGE_TAG = '1.0.0-SNAPSHOT'
    }
 
