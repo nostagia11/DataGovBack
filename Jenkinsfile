@@ -84,11 +84,11 @@ pipeline {
                    withCredentials([usernamePassword(credentialsId: env.MAVEN_CREDENTIALS_ID, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                        sh """
                            mvn deploy:deploy-file \
-                           -DgroupId=tn.esprit \
-                           -DartifactId=datagov \
+                           -DgroupId=com.dats \
+                           -DartifactId=datsconnexion \
                            -Dversion=1.0-SNAPSHOT \
                            -Dpackaging=jar \
-                           -Dfile=target/datagov-1.0.0-SNAPSHOT.jar \
+                           -Dfile=target/datsconnexionDatagov-1.0.0-SNAPSHOT.jar \
                            -DrepositoryId=deploymentRepo \
                            -Durl=${env.MAVEN_REPO_URL} \
                            -Dusername=$USERNAME \
@@ -113,4 +113,23 @@ pipeline {
                }
        }
    }
+
+
+       stage('Deploying Grafana and Prometheus') {
+           steps {
+               script {
+
+                   def prometheusExists = sh(script: "docker inspect --type=container prometheus", returnStatus: true) == 0
+                   def grafanaExists = sh(script: "docker inspect --type=container grafana", returnStatus: true) == 0
+
+                   if (prometheusExists && grafanaExists) {
+                       echo 'Prometheus and Grafana are already running. Skipping deployment.'
+                   } else {
+                       sh 'docker-compose -f docker-compose-monitoring.yml up -d'
+                   }
+               }
+           }
+       }
+   }
+
 }
