@@ -108,8 +108,8 @@ pipeline {
                    }
                }
        }
-           stage('Deploying Grafana and Prometheus') {
-               steps {
+       stage('Deploying Grafana and Prometheus') {
+            steps {
                    script {
 
                        def prometheusExists = sh(script: "docker inspect --type=container prometheus", returnStatus: true) == 0
@@ -121,14 +121,14 @@ pipeline {
                            sh 'docker-compose -f docker-compose-monitoring.yml up -d'
                        }
                    }
-               }
-           }
+            }
        }
-
-
-
-
    }
+
+
+
+
+
 
 
 
