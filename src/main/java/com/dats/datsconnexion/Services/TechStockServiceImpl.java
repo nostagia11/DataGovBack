@@ -40,7 +40,7 @@ public class TechStockServiceImpl implements TechStockService {
         techStock.setType(updatedTech.getType());
         techStock.setConnMethod(updatedTech.getConnMethod());
         techStock.setInfrastructure(updatedTech.getInfrastructure());
-        techStock.setLocal(updatedTech.getLocal());
+        techStock.setHost(updatedTech.getHost());
         techStock.setUrl(updatedTech.getUrl());
         stockRepo.save(updatedTech);
 

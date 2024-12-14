@@ -3,11 +3,10 @@ package com.dats.datsconnexion.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-
-
-
 @Entity
 public class Regle {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id ;
@@ -21,6 +20,7 @@ public class Regle {
     private  Loi  loi;
 
     public Regle() {
+
     }
 
     public void setId(Long id) {
@@ -62,4 +62,7 @@ public class Regle {
     public Loi getLoi() {
         return loi;
     }
+
+
+
 }

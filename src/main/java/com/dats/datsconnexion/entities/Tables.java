@@ -28,8 +28,8 @@ public class Tables {
 
     private String techName;
     private String natName;
-    private String type;
-    private String format;
+    private String type; //table, view, etc
+    private String format; //.sql , .xlsx, ..
 
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "table")

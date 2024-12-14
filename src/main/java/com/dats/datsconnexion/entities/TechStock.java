@@ -26,11 +26,16 @@ public class TechStock {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String type;
-    private String connMethod;
-    private String url;
-    private String local;
-    private String infrastructure;
+    private String type; // e.g., SQL Server, MySQL
+    private String connMethod; // e.g., "JDBC"
+    private String url; // e.g., "jdbc:sqlserver://host:port;databaseName=dbName"
+    private String host;
+    private String infrastructure; // Cloud or On-Premise
+
+    private String username;
+    private String ePassword; // Store the password securely
+    private int port;
+    private String dbName;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "techStock")
     private Set<SoftwareSolution> listesoftwares;
